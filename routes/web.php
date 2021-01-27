@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CatalogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/{any}', function (){
+    return view('app');
+})->where('any', '.*');
+//Route::view('/{path?}', 'app');
 
 Auth::routes();
+
+Route::get('/catalog', [CatalogController::class, 'showAllCatalog'])->name('catalog');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
